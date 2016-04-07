@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+</head>
+<body>
+  <button is="pluralsight-button"></button>
+
+  <div id="inner"></div>
+  <script>
+  	var ButtonProto = Object.create(HTMLButtonElement.prototype);
+	ButtonProto.createdCallback = function () {
+	  this.innerHTML = 'Plural Button';
+	  this.value = 'Default Value';
+	  this.style.color = 'orange';
+	}
+
+	var PluralsightButton = document.registerElement('pluralsight-button', {
+	  prototype: ButtonProto,
+	  extends: 'button'
+	});
+	
+	// Option 2
+	var button = document.createElement('button', 'pluralsight-button');
+	document.body.appendChild(button);
+	
+	// Option 3
+	document.body.appendChild( new PluralsightButton() );
+
+	// Option 4
+	document.querySelector('#inner').innerHTML = '<button is="pluralsight-button"></button>';
+  </script>
+</body>
+</html>

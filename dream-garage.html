@@ -1,0 +1,35 @@
+<template>
+    <a href="#" id="view-disclaimer">Disclaimer</a>
+    <ul>
+      <li>Hyunday Tucson</li>
+      <li>Toyota Celica</li>
+      <li>Toyota Rav$</li>
+    </ul>
+</template>
+
+<script>
+
+(function () {
+  var Proto = Object.create(HTMLElement.prototype);
+  var importDOM = document.currentScript.ownerDocument;
+
+  Proto.createdCallback = function () {
+    var template      = importDOM.querySelector('template');
+    var templateClone = document.importNode(template.content, true);
+    var disclaimer    = templateClone.querySelector('#view-disclaimer');
+
+    disclaimer.addEventListener('click', function (e) {
+      alert("Yes");
+    });
+
+    var root = this.createShadowRoot();
+    root.appendChild(templateClone);
+  };
+ 
+  document.registerElement('cars-list', {
+    prototype: Proto
+  });
+
+})();
+
+</script>
